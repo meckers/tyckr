@@ -1,8 +1,5 @@
 package controllers;
-
-import com.sun.jmx.snmp.SnmpParams;
-import play.*;
-import play.mvc.*;
+import play.mvc.Controller;
 
 
 public class Comments extends Controller {
