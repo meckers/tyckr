@@ -1,11 +1,46 @@
-bin/
-data/
-db/
-dist/
-logs/
-test-result/
-lib/
-tmp/
-modules/
-.idea/
+# Ignore all dotfiles...
+.*
+# except for .gitignore
+!.gitignore
+
+
+# Ignore Play! working directory #
+db
+eclipse
+log
+logs
+precompiled
+tmp
+test-result
+eclipse
 server.pid
+/lib
+modules
+target
+
+
+# Ignore minified javascript files
+/build/min/*
+
+# Ignore output folder with compiled code from ant test.compile target (used for testing with powermock and cobertura) #
+bin-test
+
+# intelliJ files
+.idea
+*.iml
+*.ipr
+*.iws
+out
+
+# eclipse files
+.classpath
+.project
+.settings
+
+
+# Mac OS X shit...
+.DS_Store*
+
+#libs managed by ivy
+/build/lib
+
