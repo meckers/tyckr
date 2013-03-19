@@ -114,12 +114,16 @@ Loader = {
 function callback() {
     $j = $.noConflict(true);
     console.log("jQuery now loaded with version", $j().jquery);
-    loadGui();
+    //loadGui();
+    Tyckr.start();
 }
 
 Loader.script( [
+    'http://localhost:9564/public/javascripts/libs/simple-javascript-inheritance.js',
     'http://localhost:9564/public/javascripts/jquery-loader.js',
-    'http://localhost:9564/public/javascripts/gui.js'
+    'http://localhost:9564/public/javascripts/tyckr.js',
+    'http://localhost:9564/public/javascripts/page.js',
+    'http://localhost:9564/public/javascripts/annotation.js'
 ], { complete: function() {
     JqueryLoader.load(callback);
 }
