@@ -1,65 +1,35 @@
 Tyckr = {
 
+    page: null,
+    annotationHandler: null,
+    globals: {},
+
     start: function() {
-        this.createIframes();
-        //this.bindEvents();
+        //this.createIframes();
+        this.bindEvents();
+        this.page = new Page(document);
+
     },
 
-    createIframes: function() {
-        this.location = document.location.href;
+    onLoad: function() {
+        this.annotationHandler = new AnnotationHandler(this.page);
 
-        document.removeChild(document.documentElement);
-        document.appendChild(document.createElement("body"));
+        this.annotationHandler.loadAnnotations();
 
-        var iframe = $j("<iframe></iframe>");
-        iframe.attr('id', 'main-iframe');
-        iframe.attr('src', location);
-        iframe.css({
-            'width': '100%',
-            'height': '100%',
-            'position': 'absolute'
+        var me = this;
+        var contents = $j("#main-iframe").contents();
+        contents.bind('contextmenu', function(event) {
+            me.annotationHandler.createAnnotation(event.pageX, event.pageY);
+            return false;
         });
 
-        iframe.bind('load', function() {
-            var links = $j("#main-iframe").contents().find('body').find('a');
-            links.attr('target', '_self');
-            Tyckr.bindEvents();
-        });
 
-        this.page = new Page(location);
-
-        $j("body").append(iframe);
     },
 
     bindEvents: function () {
-        var contents = $j("#main-iframe").contents();
-        /*
-        contents.bind('mousedown', function(event) {
-            console.log("mouse down");
-            switch (event.which) {
-                case 3:
-                    event.preventDefault();
-                    console.log("right mouse button", event);
-                    Tyckr.createAnnotation(event);
-                    break;
-                default:
-                    alert('You have a strange mouse');
-            }
-        });*/
 
-        contents.bind('contextmenu', function(event) {
-            var annotation = new Annotation({
-                element: event.target,
-                left: event.pageX,
-                top: event.pageY,
-                id: this.location,
-                page: this.page
-            });
-
-            return false;
-        })
+        Events.register("IFRAME_LOADED", this, this.onLoad);
 
 
     }
-
 }

@@ -120,10 +120,13 @@ function callback() {
 
 Loader.script( [
     'http://localhost:9564/public/javascripts/libs/simple-javascript-inheritance.js',
+    'http://localhost:9564/public/javascripts/css.js',
+    'http://localhost:9564/public/javascripts/events.js',
     'http://localhost:9564/public/javascripts/jquery-loader.js',
     'http://localhost:9564/public/javascripts/tyckr.js',
     'http://localhost:9564/public/javascripts/page.js',
-    'http://localhost:9564/public/javascripts/annotation.js'
+    'http://localhost:9564/public/javascripts/annotation.js',
+    'http://localhost:9564/public/javascripts/annotation-handler.js'
 ], { complete: function() {
     JqueryLoader.load(callback);
 }
